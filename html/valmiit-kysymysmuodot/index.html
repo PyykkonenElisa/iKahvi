@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html>
 
+<meta charset="utf-8">
+    
+    <head></head>
+    <body>
+    
+        <h2 style="color: hotpink">KYSELYN RAAKAPOHJA</h2>
+        
+    <form>
+        
+        minkä ikäinen olet?
+        <select name="ikä">
+        <option value="alleKakskyt">Alle 20</option>
+        <option value="alleKaksviis">21-25</option>
+        <option value="alleKolkyt">26-30</option>
+        <option value="alleKolmeviis">31-35</option>
+        <option value="alleNelkyt">36-40</option>
+        <option value="yliNelkyt">yli 41</option>    
+        </select>
+        
+        <br><br>
+        Mitä opiskelet
+        <select name="ala">
+        <option value="fina">Finanssi- ja talousasiantuntijan koulutus</option>
+        <option value="resto">Hotelli-ja ravintola-alan liikkeenjohdon koulutus</option>
+        <option value="assi">Johdon assistenttityön ja kielten koulutus</option>
+        <option value="joura">Journalismikoulutus</option>
+        <option value="bus">Liiketalouden koulutus</option>
+        <option value="liik">Liikunnan ja vapaa-ajan koulutus</option>
+        <option value="matka">Matkailun koulutus</option>
+        <option value="matkajohto">Matkailun liikkeenjohdon koulutus</option>
+        <option value="visu">Myynnin ja visuaalisen markkinoinnin koulutus</option>
+        <option value="krea">Myyntityön koulutus</option>
+        <option value="safka">Ruokatuotannon johtamisen koulutus</option>
+        <option value="tiko">Tietojenkäsittelyn koulutus</option>    
+        <option value="na">En opiskele</option>   
+        </select>
+        <br><br>
+        
+        Ostatko Haaga-Helian tiloista kofeiinituotteita? <br>
+       
+        <input type="radio" name="ostatko" value="enKoskaan">En koskaan <br>
+        <input type="radio" name="ostatko" value="harvoin" >Harvoin<br>
+        <input type="radio" name="ostatko" value="usein">Usein<br>
+        <input type="radio" name="ostatko" value="päivittäin">Päivittäin<br>
+        <br><br>
+        
+        Oletko tyytyväinen nykyiseen Haaga-Helian kofeiinituotetarjontaan? <br>
+        <input type="radio" name="tyytyväisyys" value="täysinE">täysin eri mieltä <br>
+        <input type="radio" name="tyytyväisyys" value="jokseenkinE" >jokseenkin eri mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="neutraali">ei samaa eikä eri mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="jokseenkinS">jokseenkin samaa mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="täysinS">täysin samaa mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="eos">en osaa sanoa<br><br>
+        
+        Mitä Haaga-Helian nykyisessä palvelussa olisi parannettavaa?<br>
+        <label for="viesti"></label><textarea id="viesti"></textarea>
+        
+        <br><br>
+        Mitä kofeiinituotteita käytät? <br>
+        <input type="checkbox" name="kahvi" value="kahvi">Kahvi<br>
+        <input type="checkbox" name="tee" value="tee">tee<br>
+        <input type="checkbox" name="limu" value="limu">limu<br>
+        <input type="checkbox" name="kofeiinitabletit" value="kofeiinitabletit">kofeiinitabletit<br>
+        
+        <br>
+        Käytätkö jotain muita virkistystuotteita? <br>
+        <label for="viesti"></label><textarea id="viesti"></textarea><br><br>
+		
+		Oletko merkkiuskollinen jollekin tietylle kofeiini- virkistystuotemerkille, mille?<br>
+        <label for="viesti"></label><textarea id="viesti"></textarea><br><br>
+        
+        Kuinka paljon käytät kyseisiä tuotteita koulupäivän aikana? <br>
+        <input type="radio" name="määrä" value="monta">monta kupillista päivässä <br>
+        <input type="radio" name="määrä" value="yhden" >kupillisen päivässä<br>
+        <input type="radio" name="määrä" value="muutamaViikossa">muutaman kupillisen viikossa<br>
+        <input type="radio" name="määrä" value="harvemmin">harvemmin<br>
+        <input type="radio" name="määrä" value="eos">en osaa sanoa
+        
+        
+        <br><br>
+        Kuinka paljon käyttömääräsi muuttuisi, mikäli tuotteet olisivat halvempia?<br>
+        <input type="radio" name="muutos" value="kasvaisi">Ostaisin enemmän <br>
+        <input type="radio" name="muutos" value="eiMuutosta" >hinta ei vaikuta käyttötottumuksiini
+        
+        <br><br>
+        kofeiinituotteiden ekologisuus merkitsee minulle paljon<br>
+        <input type="radio" name="tyytyväisyys" value="täysinE">täysin eri mieltä <br>
+        <input type="radio" name="tyytyväisyys" value="jokseenkinE" >jokseenkin eri mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="neutraali">ei samaa eikä eri mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="jokseenkinS">jokseenkin samaa mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="täysinS">täysin samaa mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="eos">en osaa sanoa
+        
+        <br><br>
+        Kofeiinituotteiden eettisyys merkitsee minulle paljon<br>
+        <input type="radio" name="tyytyväisyys" value="täysinE">täysin eri mieltä <br>
+        <input type="radio" name="tyytyväisyys" value="jokseenkinE" >jokseenkin eri mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="neutraali">ei samaa eikä eri mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="jokseenkinS">jokseenkin samaa mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="täysinS">täysin samaa mieltä<br>
+        <input type="radio" name="tyytyväisyys" value="eos">en osaa sanoa<br><br>
+        
+        Käyttäisitkö omaa takeaway-mukia? <br>
+        <input type="checkbox" name="muki" value="hinta">kyllä<br>
+        <input type="checkbox" name="muki" value="laatu">ei<br><br>
+        
+        Haluaisitko kahvipassin, jolla saisi alennuksia tai ilmaisen kahvin tieten ostomäärän jälkeen? <br>
+        <input type="checkbox" name="passi" value="kyllä">kyllä<br>
+        <input type="checkbox" name="passi" value="ei">ei<br>
+        
+		<br><br>
+		
+		<input type="submit">
+		
+        </form>
+   
+    
+    </body>
+    
+</html>
