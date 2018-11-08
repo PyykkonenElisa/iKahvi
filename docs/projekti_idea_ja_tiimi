@@ -1,5 +1,20 @@
 #Projektin idea:
 
-#Tiimin jäsenet:
+Projektin päällimmäisin idea on oppia miten digiprojekti toteutetaan ja miten rakennetaan toimiva käyttöliittymäkerros. 
+Toteutamme projektin yhteistyössä ohjelmmoinnin opiskelijoiden kanssa. Heidän tavoitteena on tuottaa sovellukselle back-end.
+Konkreettinen tuotoksemme tulee olemaan kyselysofta, jonka avulla voidaan selvittää Haaga-Helian opiskelijoiden kofeiinikäyttäytymistä.
 
-(Mitä tehdään? Kenelle? Miksi? Keitä ovat tiimin jäsenet ja mitä osaamista kukin tuo projektiin?)
+#Tiimin jäsenet: Elisa Pyykkönen, Emmi Saarikoski, Maria Raivio
+
+Elisa:
+Projektiassistentti
+Visuaalisesta ilmeestä vastuussa
+
+Maria:
+Product owner
+Kommunikaatiovastaava
+Koodausvastaava
+
+Emmi:
+Käytettävyysvastaava
+Google Analytics-vastaava
