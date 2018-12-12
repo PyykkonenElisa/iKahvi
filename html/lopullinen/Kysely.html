@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129818244-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129818244-1');
+</script>
+
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kysely</title>
+    <link rel="stylesheet" href="springpower_testi_ulkoasu.css">
+    <link href="https://fonts.googleapis.com/css?family=Niramit|Pattaya" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="valkoinen">
+        <h1>Kysely Haaga-Helian opiskelijoiden kofeiinikäyttäytymisestä</h1>
+        <form>
+            <div id="lomake">
+            </div>
+            <button class="painike" id="lahetys" onClick="laheta()">Lähetä</button>
+        </form>
+     <!-- <button class="painike" id="poistuminen" onClick="location.href='http://myy.haaga-helia.fi/~a1704497/iKahvi_v2/Yhteenveto.html'">Poistu</button> -->
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+
+    <script>
+        var lomakekentta = [];
+        $.getJSON("http://proto317.haaga-helia.fi:8080/Kysely/Kysely/kyselyt/1/kysymykset", function(data) {
+
+
+            //tehdään taulukko
+            var items = [];
+            //var kysymykset = data.kysymykset;
+
+            //items.push("<h1>"+data.otsikko+"</h1>")
+            //jos ylempi kommentti tulee käyttöön, vaihda => $.each "data"
+            kysymykset = data.kysymykset;
+
+
+            $.each(kysymykset, function(key, d) {
+                //sijoitetaan säätiedot taulukkoon
+
+                kysymysId = d.kysymysId;
+
+                tyyppi = d.kysymysTyyppi;
+                vaihtoehdot = d.vaihtoehdot;
+
+                if (tyyppi == "Teksti") {
+                    items.push("<br>" + d.kysymysSisus + "<br> <input type=text id=" + kysymysId + "><br> ");
+                    lomakekentta.push(kysymysId);
+                }
+                if (tyyppi == "Radio") {
+                    items.push("<br>" + d.kysymysSisus + "<br>");
+                    for (i = 0; i < vaihtoehdot.length; i++) {
+                        items.push("<input type=radio id=" + kysymysId + " name=" + kysymysId + " value=" + vaihtoehdot[i].vaihtoehtoSisus + ">" + vaihtoehdot[i].vaihtoehtoSisus + "</input><br>");
+                    }
+                    lomakekentta.push(kysymysId);
+                }
+                if (tyyppi == "Checkbox") {
+                    items.push("<br>" + d.kysymysSisus + "<br>");
+                    for (i = 0; i < vaihtoehdot.length; i++) {
+                        items.push("<input type=checkbox id=" + kysymysId + " name=" + kysymysId + " value=" + vaihtoehdot[i].vaihtoehtoSisus + ">" + vaihtoehdot[i].vaihtoehtoSisus + "</input><br>");
+                    }
+                    lomakekentta.push(kysymysId);
+                }
+
+            });
+
+
+
+            $("<ul/>", {
+                html: items.join("")
+            }).appendTo("#lomake");
+        });
+
+
+        function laheta() {
+            
+            for (i = 0; i < lomakekentta.length; i++) {
+
+                tyyppi2 = document.getElementById(lomakekentta[i]).type;
+                if (tyyppi2 == "text") {
+                    vastaus = document.getElementById(lomakekentta[i]).value;
+                    alert("{'vastausSisus': '" + vastaus + "','kysymys':{'kysymysId':" + lomakekentta[i] + "}}");
+
+                    jsonData = "{\"vastausSisus\": \"" + vastaus + "\",\"kysymys\":{\"kysymysId\":" + lomakekentta[i] + "}}";
+
+                    var myJSON = JSON.stringify(jsonData);
+                    console.log(jsonData)
+
+                    $.ajax({
+                        url: 'http://proto317.haaga-helia.fi:8080/Kysely/Kysely/vastaukset',
+                        type: 'POST',
+                        dataType: 'application/json',
+                        contentType: 'application/json',
+                        data: jsonData,
+                        success: function() {
+                            alert('POST completed. Data:' + myJSON)
+                        }
+                    });
+                    
+                    
+
+                } else if (tyyppi2 == "radio") {
+                    var radios = document.getElementsByName(lomakekentta[i]);
+                    for (var x = 0, length = radios.length; x < length; x++) {
+                        if (radios[x].checked) {
+                            vastaus = radios[x].value;
+                            alert("{'kysymys':{'kysymysId':" + lomakekentta[i] + "}, 'valitutVastaukset':[{'valittuSisus':'" + vastaus + "'}]}");
+
+                            jsonData = "{\"kysymys\":{\"kysymysId\":" + lomakekentta[i] + "}, \"valitutVastaukset\":[{\"valittuSisus\":\"" + vastaus + "\"}]}";
+
+                            var myJSON = JSON.stringify(jsonData);
+                            console.log(jsonData)
+                            $.ajax({
+                                url: 'http://proto317.haaga-helia.fi:8080/Kysely/Kysely/vastaukset',
+                                type: 'POST',
+                                dataType: 'application/json',
+                                contentType: 'application/json',
+                                data: jsonData,
+                                success: function() {
+                                    alert('POST completed. Data:' + myJSON)
+                                }
+                            });
+                
+                        }
+                    }
+
+                } else if (tyyppi2 == "checkbox") {
+                    var vaihtoehdot = [];
+                    var sisus = [];
+                    var radios = document.getElementsByName(lomakekentta[i]);
+                    for (var x = 0, length = radios.length; x < length; x++) {
+                        if (radios[x].checked) {
+                            vaihtoehdot.push(radios[x].value);
+
+                        }
+                    }
+                    for (var y = 0, length2 = vaihtoehdot.length; y < length2; y++) {
+                        if (y < (vaihtoehdot.length - 1)) {
+                            sisus.push("{\"valittuSisus\":\"" + vaihtoehdot[y] + "\"},")
+                        } else {
+                            sisus.push("{\"valittuSisus\":\"" + vaihtoehdot[y] + "\"}")
+                        }
+                    }
+                    alert("{\"kysymys\":{\"kysymysId\":" + lomakekentta[i] + "}, \"valitutVastaukset\":[" + sisus.join('') + "]}");
+
+                    jsonData = "{\"kysymys\":{\"kysymysId\":" + lomakekentta[i] + "}, \"valitutVastaukset\":[" + sisus.join('') + "]}";
+
+                    var myJSON = JSON.stringify(jsonData);
+                    console.log(jsonData)
+
+                    $.ajax({
+                        url: 'http://proto317.haaga-helia.fi:8080/Kysely/Kysely/vastaukset',
+                        type: 'POST',
+                        dataType: 'application/json',
+                        contentType: 'application/json',
+                        data: jsonData,
+                        success: function() {
+                            alert('POST completed. Data:' + myJSON)
+                        }
+                    });
+                    
+                }
+            }
+                   
+/*          for (q = 0; q < lomakekentta.length; q++) {
+            alert("Kiitos, vastauksestasi!");window.location.assign("http://myy.haaga-helia.fi/~a1704497/iKahvi_v2/Yhteenveto.html")                
+            }
+*/
+                
+            for (luku=0; luku<2; luku++ ){
+               alert("Kiitos, vastauksestasi!");
+                location.href="http://myy.haaga-helia.fi/~a1704497/iKahvi_v2/Yhteenveto.html"
+                //http://myy.haaga-helia.fi/~a1704497/iKahvi_v2/Yhteenveto.html
+               
+            }    
+
+            
+
+             // alert("Kiitos, vastauksestasi! Yhteenvedon saat painamalla 'poistu' nappia");window.location='http://myy.haaga-helia.fi/~a1704497/iKahvi_v2/Yhteenveto.html'       
+        }
+
+    </script>
+    
+
+    </body>
+
+</html>
